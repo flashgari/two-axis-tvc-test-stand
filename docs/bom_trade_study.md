@@ -1,6 +1,6 @@
 # Preliminary BOM Trade Study
 
-This began as a Week 0 trade study. Prototype 1 now uses the low-cost Option A baseline: Raspberry Pi Pico-class microcontroller, BNO085-class IMU, metal-gear PWM servos, external servo power, and a 3D printed structure. Exact component availability, current pricing, and datasheets should still be verified before buying parts.
+This began as a Week 0 trade study. Prototype 1 now uses the low-cost Option A baseline: Raspberry Pi Pico-class microcontroller, BNO085-class IMU, metal-gear PWM servos, external servo power, and a 3D printed structure. Exact vendor candidates are listed in [vendor_shortlist.md](vendor_shortlist.md). Component availability, current pricing, and datasheets should still be verified immediately before buying parts.
 
 ## Selection Philosophy
 
@@ -73,14 +73,18 @@ Selected Prototype 1 direction: 3D print the first gimbal so failures can be cor
 
 | Item | Selected part | Quantity | Reason | Source | Cost |
 | --- | --- | ---: | --- | --- | ---: |
-| Microcontroller | Raspberry Pi Pico-class RP2040 board | 1 | low cost, adequate timing/PWM/I2C | TBD | `$4-8` |
-| IMU | BNO085-class breakout | 1 | fast attitude bring-up | TBD | about `$25` |
-| Pitch actuator | metal-gear PWM servo | 1 | simple first prototype actuation | TBD | TBD |
-| Yaw actuator | metal-gear PWM servo | 1 | simple first prototype actuation | TBD | TBD |
-| Power supply/regulator | external `5-6 V` servo supply | 1 | avoids USB/microcontroller brownout | TBD | TBD |
-| Bearings/shafts/fasteners | TBD | TBD | TBD | TBD | TBD |
+| Microcontroller | Raspberry Pi Pico H or equivalent RP2040 board | 1 | low cost, adequate timing/PWM/I2C, headers reduce bring-up time | Adafruit or equivalent | about `$5` |
+| IMU | BNO085-class breakout | 1 | fast attitude bring-up with quaternion/rotation-vector output | Adafruit or equivalent | about `$25` |
+| Pitch actuator | metal-gear PWM servo | 1 | simple first prototype actuation | ServoCity/Hitec or MG996R/MG995-class budget pack | `$10-45` |
+| Yaw actuator | metal-gear PWM servo | 1 | simple first prototype actuation | ServoCity/Hitec or MG996R/MG995-class budget pack | `$10-45` |
+| Power supply/regulator | external `5 V`, `4 A` servo supply | 1 | avoids USB/microcontroller brownout | Adafruit or equivalent | about `$15` |
+| Power adapter | `2.1 mm` jack to screw terminal | 1 | clean servo-power distribution | Adafruit or equivalent | about `$2` |
+| I2C cable | STEMMA QT/Qwiic cable | 1 | reduces IMU wiring errors | Adafruit or equivalent | about `$1` |
+| Bearings/shafts/fasteners | TBD from CAD | TBD | depends on direct-drive vs supported shaft layout | TBD | TBD |
 | Printed material | PLA+/PETG | TBD | fast iteration | local/available | TBD |
 
 ## Trade Study Takeaway
 
 The first prototype should be simple enough to build quickly but instrumented well enough to generate real engineering plots. The goal is not a perfect TVC mechanism on revision 1; the goal is a measured design-build-test loop with clear iteration.
+
+The servo selection is intentionally left as a two-path decision because it is the dominant cost driver. A traceable Hitec/ServoCity servo path improves documentation quality because torque, speed, deadband, current, mass, and dimensions are published. A MG996R/MG995-class budget pack minimizes cost but must be treated as an unknown actuator that needs measured characterization before any closed-loop claims are made.

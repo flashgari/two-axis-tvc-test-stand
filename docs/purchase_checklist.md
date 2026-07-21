@@ -4,17 +4,20 @@
 
 This checklist is based on the selected low-cost Option A architecture.
 
+Exact vendor candidates are tracked in [vendor_shortlist.md](vendor_shortlist.md). Check current price and availability again immediately before ordering.
+
 ## Electronics
 
 | Item | Qty | Status | Notes |
 | --- | ---: | --- | --- |
-| Raspberry Pi Pico-class board | 1 | TBD | Pre-soldered headers recommended for speed |
-| BNO085-class IMU breakout | 1 | TBD | STEMMA/Qwiic connector useful |
-| Metal-gear PWM servos | 2 + optional spare | TBD | Prefer `>= 5 kg-cm` torque |
-| External `5-6 V` servo supply | 1 | TBD | Must handle stall/current spikes |
+| Raspberry Pi Pico H or equivalent RP2040 board with headers | 1 | Candidate selected | Pre-soldered headers recommended for speed |
+| Adafruit BNO085-class IMU breakout | 1 | Candidate selected | STEMMA/Qwiic connector useful |
+| Metal-gear PWM servos | 2 + optional spare | Candidate paths selected | ServoCity/Hitec for traceable specs, MG996R/MG995-class pack for strict budget |
+| External `5 V`, `4 A` servo supply | 1 | Candidate selected | Must handle stall/current spikes |
+| `2.1 mm` barrel jack to screw-terminal adapter | 1 | Candidate selected | Clean servo-power distribution |
 | Breadboard or protoboard | 1 | TBD | For first wiring pass |
 | Jumper wires | 1 set | TBD | Include male/female options |
-| I2C cable | 1 | TBD | Match IMU connector |
+| STEMMA QT/Qwiic I2C cable | 1 | Candidate selected | Match IMU connector |
 | USB cable | 1 | TBD | Data-capable cable |
 
 ## Mechanical
@@ -41,7 +44,8 @@ This checklist is based on the selected low-cost Option A architecture.
 
 ## Before Buying
 
-- [ ] Confirm final servo torque and dimensions.
+- [ ] Choose Servo Path A or Servo Path B from `docs/vendor_shortlist.md`.
+- [ ] Confirm final servo torque, dimensions, spline, wire length, and stall-current estimate.
 - [ ] Confirm IMU breakout voltage and connector type.
 - [ ] Confirm Pico header option.
 - [ ] Confirm servo supply voltage/current rating.
@@ -53,7 +57,9 @@ This checklist is based on the selected low-cost Option A architecture.
 Prototype 1 target budget:
 
 ```text
-about $85-150 before tools
+about $75-220 before tools, depending mostly on servo choice
 ```
 
 If the total exceeds this range, reduce scope before buying more expensive electronics. The goal is first hardware data, not final flight-like hardware.
+
+The cheapest credible path is the Pico/BNO085 electronics stack plus a MG996R/MG995-class servo pack. The cleaner documentation path is the same electronics stack plus two traceable Hitec/ServoCity servos. Either path is acceptable if the actuator limitations are measured honestly in the test campaign.

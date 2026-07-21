@@ -104,13 +104,14 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] Actuator sizing first pass
 - [x] Wiring plan
 - [x] CAD concept definition
-- [ ] Final vendor links before purchase
+- [x] Vendor shortlist before purchase
+- [ ] Final servo path selected before ordering
 - [ ] First CAD model
 - [ ] Firmware bring-up plan
 
 ## Near-Term Build Plan
 
-1. Confirm final vendor links and physical dimensions.
+1. Choose traceable-servo path or strict-budget servo path from `docs/vendor_shortlist.md`.
 2. Design first-pass gimbal CAD with mechanical stops.
 3. Build firmware skeleton for actuator commands and serial telemetry.
 4. Calibrate IMU and actuator neutral positions.
