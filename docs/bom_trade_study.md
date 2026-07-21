@@ -1,6 +1,6 @@
 # Preliminary BOM Trade Study
 
-This is a Week 0 trade study, not a final purchase list. Exact component availability, current pricing, and datasheets should be verified before buying parts.
+This began as a Week 0 trade study. Prototype 1 now uses the low-cost Option A baseline: Raspberry Pi Pico-class microcontroller, BNO085-class IMU, metal-gear PWM servos, external servo power, and a 3D printed structure. Exact component availability, current pricing, and datasheets should still be verified before buying parts.
 
 ## Selection Philosophy
 
@@ -26,7 +26,7 @@ It should not optimize for minimum mass or flight packaging. This is a benchtop 
 | Raspberry Pi Pico-class board | Inexpensive, deterministic enough, good documentation | More manual library integration |
 | Arduino-class board | Easy bring-up | May be limiting for logging/control bandwidth |
 
-Recommended direction for first build: choose a board with reliable PWM, I2C/SPI, and high-rate serial logging.
+Selected Prototype 1 direction: Raspberry Pi Pico-class board. It is low cost and provides enough PWM, I2C, timing, and USB serial telemetry for the first test stand.
 
 ### IMU
 
@@ -36,7 +36,7 @@ Recommended direction for first build: choose a board with reliable PWM, I2C/SPI
 | ICM-20948-class IMU | Raw gyro/accel/mag access | More calibration/filtering work |
 | MPU-6050-class IMU | Cheap and common | Older sensor, noisier, fewer features |
 
-Recommended direction: start with a convenient fused IMU for bring-up, but log raw gyro/accel if available so the project still demonstrates sensor reasoning.
+Selected Prototype 1 direction: BNO085-class fused IMU. It reduces bring-up time and still supports a meaningful sensor/control test if raw gyro/accel channels are logged where available.
 
 ### Actuators
 
@@ -46,7 +46,7 @@ Recommended direction: start with a convenient fused IMU for bring-up, but log r
 | Digital bus servos | Better control/feedback options | More protocol complexity |
 | BLDC gimbal motors | Smooth motion and control depth | Much harder electronics/control project |
 
-Recommended direction: use metal-gear servos for prototype 1, then document backlash and bandwidth limits honestly.
+Selected Prototype 1 direction: metal-gear PWM servos. Their backlash, deadband, and finite bandwidth are not hidden; they become part of the measured hardware characterization.
 
 ### Mechanical Structure
 
@@ -56,7 +56,7 @@ Recommended direction: use metal-gear servos for prototype 1, then document back
 | Laser-cut plates | Flat and stiff | Less geometry freedom |
 | Aluminum brackets | Stiffer and more professional | Slower fabrication |
 
-Recommended direction: 3D print the first gimbal so failures can be corrected quickly.
+Selected Prototype 1 direction: 3D print the first gimbal so failures can be corrected quickly.
 
 ## First-Build Hardware Targets
 
@@ -69,17 +69,17 @@ Recommended direction: 3D print the first gimbal so failures can be corrected qu
 | Power | Separate regulated actuator supply |
 | Structure | Rigid base, accessible fasteners, mechanical stops |
 
-## Final BOM Fields To Fill Before Purchase
+## Prototype 1 BOM Baseline
 
 | Item | Selected part | Quantity | Reason | Source | Cost |
 | --- | --- | ---: | --- | --- | ---: |
-| Microcontroller | TBD | 1 | TBD | TBD | TBD |
-| IMU | TBD | 1 | TBD | TBD | TBD |
-| Pitch actuator | TBD | 1 | TBD | TBD | TBD |
-| Yaw actuator | TBD | 1 | TBD | TBD | TBD |
-| Power supply/regulator | TBD | 1 | TBD | TBD | TBD |
+| Microcontroller | Raspberry Pi Pico-class RP2040 board | 1 | low cost, adequate timing/PWM/I2C | TBD | `$4-8` |
+| IMU | BNO085-class breakout | 1 | fast attitude bring-up | TBD | about `$25` |
+| Pitch actuator | metal-gear PWM servo | 1 | simple first prototype actuation | TBD | TBD |
+| Yaw actuator | metal-gear PWM servo | 1 | simple first prototype actuation | TBD | TBD |
+| Power supply/regulator | external `5-6 V` servo supply | 1 | avoids USB/microcontroller brownout | TBD | TBD |
 | Bearings/shafts/fasteners | TBD | TBD | TBD | TBD | TBD |
-| Printed material | TBD | TBD | TBD | TBD | TBD |
+| Printed material | PLA+/PETG | TBD | fast iteration | local/available | TBD |
 
 ## Trade Study Takeaway
 
