@@ -4,20 +4,20 @@
 
 This checklist is based on the selected low-cost Option A architecture.
 
-Exact vendor candidates are tracked in [vendor_shortlist.md](vendor_shortlist.md). Check current price and availability again immediately before ordering.
+Exact vendor candidates are tracked in [vendor_shortlist.md](vendor_shortlist.md). The final buy package is [final_purchase_package.md](final_purchase_package.md). Check current price and availability again immediately before ordering.
 
 ## Electronics
 
 | Item | Qty | Status | Notes |
 | --- | ---: | --- | --- |
-| Raspberry Pi Pico H or equivalent RP2040 board with headers | 1 | Candidate selected | Pre-soldered headers recommended for speed |
-| Adafruit BNO085-class IMU breakout | 1 | Candidate selected | STEMMA/Qwiic connector useful |
-| Hitec HS-625MG metal-gear PWM servos | 2 | Selected | Traceable torque, speed, mass, spline, and dimensions for CAD/test documentation |
-| External `5 V`, `4 A` servo supply | 1 | Candidate selected | Must handle stall/current spikes |
-| `2.1 mm` barrel jack to screw-terminal adapter | 1 | Candidate selected | Clean servo-power distribution |
+| Raspberry Pi Pico H with headers | 1 | Final buy item | Pre-soldered headers recommended for speed |
+| Adafruit BNO085-class IMU breakout | 1 | Final buy item | STEMMA/Qwiic connector useful |
+| Hitec HS-625MG metal-gear PWM servos | 2 | Final buy item | Traceable torque, speed, mass, spline, and dimensions for CAD/test documentation |
+| External `5 V`, `4 A` servo supply | 1 | Final buy item | Must handle stall/current spikes |
+| `2.1 mm` barrel jack to screw-terminal adapter | 1 | Final buy item | Clean servo-power distribution |
 | Breadboard or protoboard | 1 | TBD | For first wiring pass |
 | Jumper wires | 1 set | TBD | Include male/female options |
-| STEMMA QT/Qwiic I2C cable | 1 | Candidate selected | Match IMU connector |
+| STEMMA QT/Qwiic I2C cable | 1 | Final buy item | Match IMU connector |
 | USB cable | 1 | TBD | Data-capable cable |
 
 ## Mechanical
@@ -45,6 +45,7 @@ Exact vendor candidates are tracked in [vendor_shortlist.md](vendor_shortlist.md
 ## Before Buying
 
 - [x] Choose Servo Path A from `docs/vendor_shortlist.md`.
+- [x] Create final buy package.
 - [ ] Confirm HS-625MG dimensions, spline, horn package, wire length, and stall-current estimate.
 - [ ] Confirm IMU breakout voltage and connector type.
 - [ ] Confirm Pico header option.

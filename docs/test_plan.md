@@ -25,6 +25,8 @@ Pass criteria:
 
 Purpose: map PWM command to approximate gimbal angle.
 
+Detailed first-hardware procedure: [first_hardware_test_procedure.md](first_hardware_test_procedure.md)
+
 Procedure:
 
 1. Command neutral PWM.

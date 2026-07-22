@@ -108,6 +108,19 @@ The repo includes a synthetic step-response example so the analysis stack can be
 
 The analysis computes rise time, response delay, overshoot, settling time, steady-state error, peak tracking error, and hysteresis bias. These metrics are interpreted as evidence of actuator bandwidth, deadband, backlash, structural compliance, wire preload, and sensor filtering.
 
+## Build Transition
+
+The project is ready to move from design artifacts to hardware purchase and first bench tests.
+
+Build documents:
+
+- [docs/final_purchase_package.md](docs/final_purchase_package.md)
+- [docs/first_hardware_test_procedure.md](docs/first_hardware_test_procedure.md)
+
+Core purchase subtotal is currently about `$135.83` before tax and shipping. Full first-build estimate remains about `$165-220` after generic hardware, filament, and small tools/fixtures.
+
+The first powered test must start with the servo horn removed. This prevents an unknown servo neutral from driving the mechanism into a hard stop.
+
 ## Week 1 Engineering Basis
 
 The first sizing pass treats the gimbal/nozzle carrier as a rigid body with an offset center of mass. If the moving assembly has mass `m` and its center of mass is offset by `r` from the rotation axis, the static gravity moment is
@@ -172,6 +185,8 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] Pico firmware skeleton
 - [x] Firmware bring-up plan
 - [x] Data capture and analysis pipeline
+- [x] Final purchase package
+- [x] First hardware test procedure
 - [ ] Dimension-verified CAD after parts arrive
 - [ ] Hardware servo-neutral test
 
