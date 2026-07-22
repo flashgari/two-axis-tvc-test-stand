@@ -41,14 +41,14 @@ Prototype 1 uses the lowest-cost architecture that still supports a real control
 | --- | --- |
 | Microcontroller | Raspberry Pi Pico-class RP2040 board |
 | IMU | BNO085-class fused IMU breakout |
-| Actuators | Two metal-gear PWM servos |
+| Actuators | Two Hitec HS-625MG metal-gear PWM servos |
 | Power | External regulated `5-6 V` servo supply |
 | Structure | 3D printed PLA+/PETG gimbal |
 | Control | PID first, model-based comparison later |
 
-Estimated Prototype 1 budget: about `$85-150` before tools.
+Estimated Prototype 1 budget: about `$165-220` before tools, tax, and shipping.
 
-This baseline was selected because it gets to hardware test data quickly: the Pico is sufficient for a `50-100 Hz` embedded control loop, the BNO085 shortens attitude bring-up while still allowing sensor-performance discussion, metal-gear servos expose real actuator nonidealities, and a printed structure allows rapid iteration after the first measured step-response and disturbance-rejection tests.
+This baseline was selected because it gets to hardware test data quickly while keeping the actuator assumptions defensible: the Pico is sufficient for a `50-100 Hz` embedded control loop, the BNO085 shortens attitude bring-up while still allowing sensor-performance discussion, Hitec HS-625MG servos provide traceable torque/speed/dimension data for CAD and test planning, and a printed structure allows rapid iteration after the first measured step-response and disturbance-rejection tests.
 
 ## Week 1 Engineering Basis
 
@@ -105,13 +105,13 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] Wiring plan
 - [x] CAD concept definition
 - [x] Vendor shortlist before purchase
-- [ ] Final servo path selected before ordering
+- [x] Final servo path selected before ordering
 - [ ] First CAD model
 - [ ] Firmware bring-up plan
 
 ## Near-Term Build Plan
 
-1. Choose traceable-servo path or strict-budget servo path from `docs/vendor_shortlist.md`.
+1. Confirm HS-625MG servo dimensions, spline geometry, and horn package before CAD.
 2. Design first-pass gimbal CAD with mechanical stops.
 3. Build firmware skeleton for actuator commands and serial telemetry.
 4. Calibrate IMU and actuator neutral positions.

@@ -12,7 +12,7 @@ Exact vendor candidates are tracked in [vendor_shortlist.md](vendor_shortlist.md
 | --- | ---: | --- | --- |
 | Raspberry Pi Pico H or equivalent RP2040 board with headers | 1 | Candidate selected | Pre-soldered headers recommended for speed |
 | Adafruit BNO085-class IMU breakout | 1 | Candidate selected | STEMMA/Qwiic connector useful |
-| Metal-gear PWM servos | 2 + optional spare | Candidate paths selected | ServoCity/Hitec for traceable specs, MG996R/MG995-class pack for strict budget |
+| Hitec HS-625MG metal-gear PWM servos | 2 | Selected | Traceable torque, speed, mass, spline, and dimensions for CAD/test documentation |
 | External `5 V`, `4 A` servo supply | 1 | Candidate selected | Must handle stall/current spikes |
 | `2.1 mm` barrel jack to screw-terminal adapter | 1 | Candidate selected | Clean servo-power distribution |
 | Breadboard or protoboard | 1 | TBD | For first wiring pass |
@@ -44,8 +44,8 @@ Exact vendor candidates are tracked in [vendor_shortlist.md](vendor_shortlist.md
 
 ## Before Buying
 
-- [ ] Choose Servo Path A or Servo Path B from `docs/vendor_shortlist.md`.
-- [ ] Confirm final servo torque, dimensions, spline, wire length, and stall-current estimate.
+- [x] Choose Servo Path A from `docs/vendor_shortlist.md`.
+- [ ] Confirm HS-625MG dimensions, spline, horn package, wire length, and stall-current estimate.
 - [ ] Confirm IMU breakout voltage and connector type.
 - [ ] Confirm Pico header option.
 - [ ] Confirm servo supply voltage/current rating.
@@ -57,9 +57,9 @@ Exact vendor candidates are tracked in [vendor_shortlist.md](vendor_shortlist.md
 Prototype 1 target budget:
 
 ```text
-about $75-220 before tools, depending mostly on servo choice
+about $165-220 before tools, tax, and shipping
 ```
 
 If the total exceeds this range, reduce scope before buying more expensive electronics. The goal is first hardware data, not final flight-like hardware.
 
-The cheapest credible path is the Pico/BNO085 electronics stack plus a MG996R/MG995-class servo pack. The cleaner documentation path is the same electronics stack plus two traceable Hitec/ServoCity servos. Either path is acceptable if the actuator limitations are measured honestly in the test campaign.
+The selected path is the Pico/BNO085 electronics stack plus two traceable Hitec HS-625MG servos. This is more expensive than the strict-budget servo pack, but it gives the project stronger CAD inputs and a cleaner actuator-specification trail.

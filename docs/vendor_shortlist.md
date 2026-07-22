@@ -4,9 +4,9 @@ Current check date: `2026-07-21`
 
 This document converts the Prototype 1 architecture into a buyable parts list. Prices and availability should be checked again immediately before ordering.
 
-## Recommended First Purchase
+## Selected First Purchase
 
-The recommended first purchase is the low-cost electronics stack with either a traceable-servo path or a strict-budget servo path.
+Prototype 1 will use the traceable-servo path. The strict-budget servo path is retained below only as a rejected lower-cost alternative.
 
 | Subsystem | Recommended part | Qty | Current reference price | Link | Engineering reason |
 | --- | --- | ---: | ---: | --- | --- |
@@ -18,7 +18,7 @@ The recommended first purchase is the low-cost electronics stack with either a t
 
 ## Servo Decision
 
-The servo choice is the main cost/quality trade.
+The servo choice is the main cost/quality trade. The selected decision is Path A: two Hitec HS-625MG standard metal-gear servos.
 
 ### Path A: Traceable Servo, Stronger Documentation
 
@@ -26,7 +26,7 @@ The servo choice is the main cost/quality trade.
 | --- | ---: | ---: | --- | --- |
 | ServoCity Hitec HS-625MG standard metal-gear servo | 2 | `$43.99` each | <https://www.servocity.com/hs-625mg-servo/> | `5.5 kg-cm` at `4.8 V`, `6.8 kg-cm` at `6.0 V`, about `0.15 s/60 deg` at `6.0 V`, standard-size package |
 
-Use this path if the priority is a cleaner engineering record. The benefit is that torque, speed, deadband, current, spline, mass, and dimensions are published by the vendor, which makes the CAD model and test-plan assumptions easier to defend.
+This is the selected path. The benefit is that torque, speed, deadband, current, spline, mass, and dimensions are published by the vendor, which makes the CAD model and test-plan assumptions easier to defend.
 
 Estimated electronics/servo subtotal:
 
@@ -36,13 +36,13 @@ Estimated electronics/servo subtotal:
 
 After fasteners, bearings, filament, jumpers, and shipping, this likely becomes about `$165-220`.
 
-### Path B: Strict-Budget Servo, Lower Cost
+### Rejected Alternative: Strict-Budget Servo, Lower Cost
 
 | Part family | Qty | Typical low-cost route | Key specs to verify before buying |
 | --- | ---: | --- | --- |
 | MG996R/MG995-class metal-gear PWM servo pack | 2 plus spares | Amazon/eBay/robotics suppliers | `>= 5 kg-cm` stall torque at `5-6 V`, standard-size `~40 x 20 x 43 mm`, metal gears, included horns, stall current estimate |
 
-Use this path if the priority is keeping the first build as cheap as possible. The trade is that generic servo listings can have inconsistent specs, clone variation, and weaker documentation. That is acceptable only if the project explicitly measures backlash, deadband, response time, and repeatability instead of assuming the listing is correct.
+This path is rejected for Prototype 1 because generic servo listings can have inconsistent specs, clone variation, and weaker documentation. It would lower the cost, but it would make the first CAD model and test report less defensible.
 
 Expected strict-budget subtotal:
 
@@ -50,16 +50,13 @@ Expected strict-budget subtotal:
 electronics + servo pack ~= $75-120 before mechanical hardware and shipping
 ```
 
-Path B is the lowest-cost path, but Path A is the cleaner portfolio path.
+Path B remains a fallback only if the budget changes later.
 
 ## Current Decision
 
-For Prototype 1, use this decision rule:
+Prototype 1 will buy two Hitec HS-625MG servos. This is the cleaner portfolio path because the first CAD and test report can reference traceable actuator specifications instead of relying on generic marketplace claims.
 
-1. If the budget can tolerate the extra cost, buy the ServoCity/Hitec servos so the first CAD and test report are tied to traceable specifications.
-2. If minimizing cost is more important, buy a MG996R/MG995-class pack and treat actuator characterization as a required Week 2 test, not an optional extra.
-
-Either path still supports the same aerospace controls narrative: the actuator is not assumed ideal. It is measured as part of the plant.
+The actuator is still not assumed ideal. Even with a traceable servo, the hardware campaign must measure backlash, deadband, response time, steady-state error, and repeatability.
 
 ## CAD Inputs To Capture Before Modeling
 

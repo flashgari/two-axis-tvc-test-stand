@@ -75,8 +75,8 @@ Selected Prototype 1 direction: 3D print the first gimbal so failures can be cor
 | --- | --- | ---: | --- | --- | ---: |
 | Microcontroller | Raspberry Pi Pico H or equivalent RP2040 board | 1 | low cost, adequate timing/PWM/I2C, headers reduce bring-up time | Adafruit or equivalent | about `$5` |
 | IMU | BNO085-class breakout | 1 | fast attitude bring-up with quaternion/rotation-vector output | Adafruit or equivalent | about `$25` |
-| Pitch actuator | metal-gear PWM servo | 1 | simple first prototype actuation | ServoCity/Hitec or MG996R/MG995-class budget pack | `$10-45` |
-| Yaw actuator | metal-gear PWM servo | 1 | simple first prototype actuation | ServoCity/Hitec or MG996R/MG995-class budget pack | `$10-45` |
+| Pitch actuator | Hitec HS-625MG metal-gear PWM servo | 1 | traceable actuator specs for CAD, torque margin, and response testing | ServoCity/Hitec | `$43.99` |
+| Yaw actuator | Hitec HS-625MG metal-gear PWM servo | 1 | traceable actuator specs for CAD, torque margin, and response testing | ServoCity/Hitec | `$43.99` |
 | Power supply/regulator | external `5 V`, `4 A` servo supply | 1 | avoids USB/microcontroller brownout | Adafruit or equivalent | about `$15` |
 | Power adapter | `2.1 mm` jack to screw terminal | 1 | clean servo-power distribution | Adafruit or equivalent | about `$2` |
 | I2C cable | STEMMA QT/Qwiic cable | 1 | reduces IMU wiring errors | Adafruit or equivalent | about `$1` |
@@ -87,4 +87,4 @@ Selected Prototype 1 direction: 3D print the first gimbal so failures can be cor
 
 The first prototype should be simple enough to build quickly but instrumented well enough to generate real engineering plots. The goal is not a perfect TVC mechanism on revision 1; the goal is a measured design-build-test loop with clear iteration.
 
-The servo selection is intentionally left as a two-path decision because it is the dominant cost driver. A traceable Hitec/ServoCity servo path improves documentation quality because torque, speed, deadband, current, mass, and dimensions are published. A MG996R/MG995-class budget pack minimizes cost but must be treated as an unknown actuator that needs measured characterization before any closed-loop claims are made.
+The selected servo path is the traceable Hitec/ServoCity option. This increases cost, but improves documentation quality because torque, speed, deadband, current, mass, and dimensions are published. A MG996R/MG995-class budget pack would minimize cost, but it would need to be treated as an unknown actuator before any closed-loop claims are made.
