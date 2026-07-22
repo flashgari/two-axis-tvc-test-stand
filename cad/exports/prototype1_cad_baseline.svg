@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Prototype 1 Two-Axis TVC CAD Baseline</title>
+  <desc id="desc">Annotated first-pass CAD layout for a two-axis thrust vector control test stand.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0f172a"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; }
+      .base { fill: #d9dee7; stroke: #475569; stroke-width: 2; }
+      .servo { fill: #bfdbfe; stroke: #1d4ed8; stroke-width: 2; }
+      .frame { fill: #bbf7d0; stroke: #047857; stroke-width: 2; }
+      .carrier { fill: #fed7aa; stroke: #c2410c; stroke-width: 2; }
+      .nozzle { fill: #fecaca; stroke: #dc2626; stroke-width: 2; }
+      .imu { fill: #ddd6fe; stroke: #7c3aed; stroke-width: 2; }
+      .stop { fill: #fee2e2; stroke: #ef4444; stroke-width: 2; }
+      .axis { stroke: #0f172a; stroke-width: 2.5; marker-end: url(#arrow); }
+      .dim { stroke: #64748b; stroke-width: 1.8; stroke-dasharray: 6 5; }
+      .txt { font-family: Arial, Helvetica, sans-serif; fill: #0f172a; }
+      .h1 { font-size: 28px; font-weight: 700; }
+      .h2 { font-size: 20px; font-weight: 700; }
+      .body { font-size: 15px; }
+      .small { font-size: 13px; fill: #475569; }
+      .label { font-size: 14px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="760"/>
+  <text class="txt h1" x="44" y="54">Prototype 1 CAD Baseline: Two-Axis TVC Test Stand</text>
+  <text class="txt body" x="44" y="82">Traceable-servo layout using HS-625MG dimensions; final dimensions must be verified with calipers before printing.</text>
+
+  <rect class="panel" x="44" y="112" width="520" height="430" rx="8"/>
+  <text class="txt h2" x="70" y="148">Top View Layout</text>
+  <rect class="base" x="120" y="205" width="360" height="260" rx="12"/>
+  <text class="txt label" x="246" y="490">base plate 160 x 120 mm</text>
+
+  <rect class="frame" x="250" y="240" width="100" height="190" rx="6"/>
+  <rect fill="#fff" stroke="#047857" stroke-width="2" x="274" y="260" width="52" height="150" rx="3"/>
+  <text class="txt label" x="226" y="225">outer yaw frame</text>
+
+  <rect class="carrier" x="280" y="275" width="40" height="120" rx="5"/>
+  <text class="txt small" x="328" y="338">pitch carrier</text>
+
+  <path class="nozzle" d="M320 328 L420 304 L420 366 Z"/>
+  <text class="txt small" x="380" y="292">mock nozzle</text>
+
+  <rect class="imu" x="286" y="300" width="28" height="22" rx="2"/>
+  <text class="txt small" x="205" y="308">IMU on moving carrier</text>
+  <line class="dim" x1="280" y1="310" x2="235" y2="310"/>
+
+  <rect class="servo" x="125" y="250" width="96" height="47" rx="5"/>
+  <circle cx="200" cy="273" r="8" fill="#1e3a8a"/>
+  <text class="txt small" x="120" y="238">yaw servo</text>
+
+  <rect class="servo" x="376" y="250" width="47" height="96" rx="5"/>
+  <circle cx="399" cy="320" r="8" fill="#1e3a8a"/>
+  <text class="txt small" x="430" y="304">pitch servo</text>
+
+  <path class="stop" d="M438 326 A76 76 0 0 0 432 287 L452 284 A95 95 0 0 1 459 332 Z"/>
+  <path class="stop" d="M438 334 A76 76 0 0 1 432 373 L452 376 A95 95 0 0 0 459 328 Z"/>
+  <text class="txt small" x="442" y="388">hard stops about +/-15 deg</text>
+
+  <line class="axis" x1="300" y1="335" x2="300" y2="250"/>
+  <text class="txt small" x="307" y="255">+y yaw ref</text>
+  <line class="axis" x1="300" y1="335" x2="390" y2="335"/>
+  <text class="txt small" x="344" y="354">+x pitch ref</text>
+
+  <rect class="panel" x="604" y="112" width="552" height="430" rx="8"/>
+  <text class="txt h2" x="630" y="148">Side/Functional View</text>
+  <rect class="base" x="680" y="438" width="400" height="28" rx="6"/>
+  <rect class="frame" x="820" y="235" width="44" height="210" rx="5"/>
+  <rect class="carrier" x="856" y="282" width="36" height="132" rx="5" transform="rotate(-10 874 348)"/>
+  <path class="nozzle" d="M895 338 L1030 300 L1038 345 L900 366 Z"/>
+  <rect class="imu" x="858" y="258" width="42" height="26" rx="3" transform="rotate(-10 879 271)"/>
+  <text class="txt small" x="915" y="271">IMU measures controlled body</text>
+  <line class="dim" x1="902" y1="273" x2="1000" y2="273"/>
+
+  <rect class="servo" x="700" y="385" width="95" height="47" rx="5"/>
+  <circle cx="775" cy="408" r="8" fill="#1e3a8a"/>
+  <text class="txt small" x="700" y="374">base-mounted yaw servo envelope</text>
+
+  <rect class="servo" x="928" y="382" width="47" height="96" rx="5"/>
+  <circle cx="952" cy="407" r="8" fill="#1e3a8a"/>
+  <text class="txt small" x="984" y="415">pitch servo envelope</text>
+
+  <line class="axis" x1="874" y1="348" x2="874" y2="250"/>
+  <text class="txt small" x="884" y="252">+z up</text>
+  <path d="M842 362 A70 70 0 0 1 898 300" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+  <text class="txt small" x="752" y="308">firmware: +/-10 deg</text>
+  <text class="txt small" x="752" y="329">hard stop: about +/-15 deg</text>
+
+  <rect class="panel" x="44" y="570" width="1112" height="130" rx="8"/>
+  <text class="txt h2" x="70" y="606">CAD Baseline Rationale</text>
+  <text class="txt body" x="70" y="636">Keep moving mass near the axes to reduce gravity moment. Mount the IMU on the moving carrier so measured attitude matches the controlled output.</text>
+  <text class="txt body" x="70" y="662">Separate firmware limits from mechanical stops. Route wires with slack so cable stiffness does not become the dominant disturbance torque.</text>
+  <text class="txt body" x="70" y="688">First tests should identify actuator lag, backlash, frame compliance, sensor filtering, and steady-state bias from real measured data.</text>
+</svg>

@@ -50,6 +50,18 @@ Estimated Prototype 1 budget: about `$165-220` before tools, tax, and shipping.
 
 This baseline was selected because it gets to hardware test data quickly while keeping the actuator assumptions defensible: the Pico is sufficient for a `50-100 Hz` embedded control loop, the BNO085 shortens attitude bring-up while still allowing sensor-performance discussion, Hitec HS-625MG servos provide traceable torque/speed/dimension data for CAD and test planning, and a printed structure allows rapid iteration after the first measured step-response and disturbance-rejection tests.
 
+## CAD Baseline
+
+The first CAD baseline is started in [cad/](cad/). It defines the coordinate convention, servo envelope assumptions, two-axis gimbal architecture, mock nozzle carrier, IMU placement, hard-stop philosophy, and Rev A design-review checklist.
+
+![Prototype 1 CAD baseline](cad/exports/prototype1_cad_baseline.svg)
+
+Key CAD files:
+
+- [cad/prototype1_parameters.md](cad/prototype1_parameters.md)
+- [cad/prototype1_gimbal_baseline.scad](cad/prototype1_gimbal_baseline.scad)
+- [cad/prototype1_cad_review.md](cad/prototype1_cad_review.md)
+
 ## Week 1 Engineering Basis
 
 The first sizing pass treats the gimbal/nozzle carrier as a rigid body with an offset center of mass. If the moving assembly has mass `m` and its center of mass is offset by `r` from the rotation axis, the static gravity moment is
@@ -106,12 +118,13 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] CAD concept definition
 - [x] Vendor shortlist before purchase
 - [x] Final servo path selected before ordering
-- [ ] First CAD model
+- [x] CAD baseline started
+- [ ] Dimension-verified CAD after parts arrive
 - [ ] Firmware bring-up plan
 
 ## Near-Term Build Plan
 
-1. Confirm HS-625MG servo dimensions, spline geometry, and horn package before CAD.
+1. Confirm HS-625MG servo dimensions, spline geometry, and horn package before Rev A CAD.
 2. Design first-pass gimbal CAD with mechanical stops.
 3. Build firmware skeleton for actuator commands and serial telemetry.
 4. Calibrate IMU and actuator neutral positions.
