@@ -12,6 +12,29 @@ This project is intentionally hardware-first. The objective is to demonstrate th
 requirements -> CAD -> fabrication -> electronics -> firmware -> calibration -> test data -> iteration
 ```
 
+## Current Project Status
+
+Prototype 1 is in the pre-hardware verification stage. The design package is no longer just a concept: requirements, actuator sizing, BOM, CAD baseline, split STL exports, firmware skeleton, serial logging, analysis scripts, and pre-hardware response predictions are already in the repo.
+
+The next engineering question is:
+
+```text
+How closely does the real printed gimbal match the predicted pitch/yaw dynamic response?
+```
+
+That question is answered by comparing predicted and measured step-response metrics for each axis. A good first test is not judged by perfect motion. It is judged by whether the measured response exposes the dominant nonideality: actuator lag, servo deadband, gear backlash, printed-structure compliance, bearing friction, wire preload, center-of-mass bias, sensor filtering, or supply-voltage sag.
+
+| Stage | Status | Evidence |
+| --- | --- | --- |
+| Requirements and safety scope | complete | [docs/week0_requirements.md](docs/week0_requirements.md), [docs/safety_plan.md](docs/safety_plan.md) |
+| Hardware selection and purchase package | complete | [docs/final_purchase_package.md](docs/final_purchase_package.md) |
+| CAD baseline and printable Rev A parts | complete | [cad/](cad/) |
+| Firmware and telemetry skeleton | complete | [firmware/](firmware/) |
+| Analysis and plotting pipeline | complete | [docs/test_and_analysis_workflow.md](docs/test_and_analysis_workflow.md) |
+| Pre-hardware dynamic prediction | complete | [docs/pre_hardware_simulation.md](docs/pre_hardware_simulation.md) |
+| Calibration and first-test worksheet | ready before hardware | [docs/hardware_calibration_worksheet.md](docs/hardware_calibration_worksheet.md) |
+| Physical build and measured data | next | first servo-neutral and pitch/yaw step tests |
+
 ## Why This Project
 
 The previous 6-DOF rocket simulator demonstrated nonlinear flight dynamics, TVC allocation, LQR control, actuator dynamics, and robustness verification in software. This project turns that GNC stack into a physical test article.
@@ -138,6 +161,7 @@ Build documents:
 
 - [docs/final_purchase_package.md](docs/final_purchase_package.md)
 - [docs/first_hardware_test_procedure.md](docs/first_hardware_test_procedure.md)
+- [docs/hardware_calibration_worksheet.md](docs/hardware_calibration_worksheet.md)
 
 Core purchase subtotal is currently about `$135.83` before tax and shipping. Full first-build estimate remains about `$165-220` after generic hardware, filament, and small tools/fixtures.
 
@@ -210,6 +234,7 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] Final purchase package
 - [x] First hardware test procedure
 - [x] Pre-hardware dynamic prediction model
+- [x] Hardware calibration worksheet and log templates
 - [ ] Dimension-verified CAD after parts arrive
 - [ ] Hardware servo-neutral test
 

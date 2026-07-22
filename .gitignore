@@ -11,3 +11,6 @@ data/*.csv
 !data/examples/
 !data/examples/*.csv
 !data/examples/*.json
+!data/templates/
+!data/templates/*.md
+!data/templates/*.csv

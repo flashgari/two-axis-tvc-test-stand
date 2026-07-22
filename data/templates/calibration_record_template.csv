@@ -1,0 +1,2 @@
+date,test_id,axis,neutral_pwm_us,mechanical_zero_deg,positive_limit_deg,negative_limit_deg,supply_v_no_load,supply_v_moving,imu_zero_deg,gyro_bias_dps,hysteresis_bias_deg,operator_notes
+YYYY-MM-DD,CAL_NEUTRAL_A,pitch,1500,0.0,10.0,-10.0,5.0,5.0,0.0,0.0,0.0,replace example row after calibration

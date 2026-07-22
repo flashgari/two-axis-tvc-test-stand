@@ -4,6 +4,8 @@
 
 Safely run the first Pico/servo/telemetry test without damaging the Rev A gimbal or corrupting the data. This procedure starts with the horn removed, verifies neutral PWM, then progresses to limited motion.
 
+Use [hardware_calibration_worksheet.md](hardware_calibration_worksheet.md) during the test and record structured data using the templates in [../data/templates/](../data/templates/).
+
 ## Required Hardware
 
 - Raspberry Pi Pico H
@@ -165,3 +167,5 @@ For the portfolio, save:
 - observations and failure notes
 
 The goal is not a perfect first test. The goal is a traceable design-build-test loop.
+
+The first measured results should be compared directly against the pre-hardware prediction files in `data/examples/`. If the measured response disagrees with prediction, treat the disagreement as engineering information: it tells you whether the dominant missing physics is actuator lag, friction, backlash, structural compliance, wire preload, CM offset, sensor filtering, or power droop.

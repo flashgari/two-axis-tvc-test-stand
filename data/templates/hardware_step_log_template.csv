@@ -1,0 +1,2 @@
+time_ms,mode,pitch_cmd_deg,meas_pitch_deg,pitch_pwm_us,gyro_pitch_dps,yaw_cmd_deg,meas_yaw_deg,yaw_pwm_us,gyro_yaw_dps,servo_supply_v,imu_status,test_id,notes
+0,PITCH_STEP_5DEG_A,0.0,0.0,1500,0.0,0.0,0.0,1500,0.0,5.0,OK,PITCH_STEP_5DEG_A,replace example row with measured telemetry
