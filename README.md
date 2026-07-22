@@ -32,8 +32,31 @@ That question is answered by comparing predicted and measured step-response metr
 | Firmware and telemetry skeleton | complete | [firmware/](firmware/) |
 | Analysis and plotting pipeline | complete | [docs/test_and_analysis_workflow.md](docs/test_and_analysis_workflow.md) |
 | Pre-hardware dynamic prediction | complete | [docs/pre_hardware_simulation.md](docs/pre_hardware_simulation.md) |
+| Rev A design review | complete | [docs/rev_a_design_review_summary.md](docs/rev_a_design_review_summary.md) |
 | Calibration and first-test worksheet | ready before hardware | [docs/hardware_calibration_worksheet.md](docs/hardware_calibration_worksheet.md) |
 | Physical build and measured data | next | first servo-neutral and pitch/yaw step tests |
+
+## Visual Evidence
+
+### Rev A CAD Baseline
+
+![Prototype 1 CAD baseline](cad/exports/prototype1_cad_baseline.svg)
+
+This CAD baseline shows the complete benchtop TVC plant: fixed base, outer yaw structure, inner pitch carrier, mock nozzle, servo envelopes, IMU placement, and hard-stop geometry. The important physics point is that this is not a decorative model. The moving mass distribution defines `I_axis`, the offset nozzle and wiring create disturbance moments, and the printed frame stiffness/damping will directly shape the measured step response.
+
+### Predicted Pitch Step Response
+
+![Pre-hardware pitch step prediction](plots/examples/prehardware_pitch_step_prediction_pitch_step_response.svg)
+
+Pitch is predicted to respond faster because its moving inertia is mainly the nozzle carrier and inner pitch assembly. For a fixed useful servo torque, the angular acceleration follows `theta_ddot = tau_net / I_pitch`; lower inertia produces a faster rise time and shorter settling time. Any measured pitch response that is much slower than this prediction will point to underestimated friction, servo lag, printed-frame compliance, or supply-voltage droop.
+
+### Predicted Yaw Step Response
+
+![Pre-hardware yaw step prediction](plots/examples/prehardware_yaw_step_prediction_yaw_step_response.svg)
+
+Yaw is predicted to be slower and more oscillatory because the yaw axis carries the pitch subsystem, servo mass, carrier, and nozzle. That increases `I_yaw` by roughly an order of magnitude relative to pitch in the current estimate. The physical expectation is therefore lower angular acceleration, longer settling time, and stronger sensitivity to backlash or frame compliance for the same actuator torque limit.
+
+For a faster review path, open [FIGURE_INDEX.md](FIGURE_INDEX.md). For the Rev A engineering judgment, open [docs/rev_a_design_review_summary.md](docs/rev_a_design_review_summary.md).
 
 ## Why This Project
 
@@ -76,8 +99,6 @@ This baseline was selected because it gets to hardware test data quickly while k
 ## CAD Baseline
 
 The first CAD baseline is started in [cad/](cad/). It defines the coordinate convention, servo envelope assumptions, two-axis gimbal architecture, mock nozzle carrier, IMU placement, hard-stop philosophy, and Rev A design-review checklist.
-
-![Prototype 1 CAD baseline](cad/exports/prototype1_cad_baseline.svg)
 
 Key CAD files:
 
@@ -160,6 +181,7 @@ The project is ready to move from design artifacts to hardware purchase and firs
 Build documents:
 
 - [docs/final_purchase_package.md](docs/final_purchase_package.md)
+- [docs/rev_a_design_review_summary.md](docs/rev_a_design_review_summary.md)
 - [docs/first_hardware_test_procedure.md](docs/first_hardware_test_procedure.md)
 - [docs/hardware_calibration_worksheet.md](docs/hardware_calibration_worksheet.md)
 
@@ -235,6 +257,8 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] First hardware test procedure
 - [x] Pre-hardware dynamic prediction model
 - [x] Hardware calibration worksheet and log templates
+- [x] Recruiter-facing figure index
+- [x] Rev A design review summary
 - [ ] Dimension-verified CAD after parts arrive
 - [ ] Hardware servo-neutral test
 
