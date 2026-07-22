@@ -10,3 +10,5 @@ Minimum plot set:
 - open-loop step response
 - closed-loop step response
 - disturbance rejection response
+
+Example plots generated from synthetic logs live in `plots/examples/`.

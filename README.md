@@ -90,6 +90,24 @@ The current firmware implements:
 
 Firmware is treated as part of the physical plant, not just software. PWM commands are only actuator inputs; the measured IMU response will reveal servo deadband, backlash, finite speed, structural compliance, and cable-induced disturbance torques.
 
+## Test And Analysis Pipeline
+
+The verification workflow is documented in [docs/test_and_analysis_workflow.md](docs/test_and_analysis_workflow.md).
+
+Current pipeline:
+
+```text
+Pico serial CSV -> data log -> metrics JSON -> response plot -> physical interpretation
+```
+
+The repo includes a synthetic step-response example so the analysis stack can be tested before hardware arrives:
+
+- `data/examples/synthetic_pitch_step.csv`
+- `data/examples/synthetic_pitch_step.pitch.metrics.json`
+- `plots/examples/synthetic_pitch_step_pitch_step_response.svg`
+
+The analysis computes rise time, response delay, overshoot, settling time, steady-state error, peak tracking error, and hysteresis bias. These metrics are interpreted as evidence of actuator bandwidth, deadband, backlash, structural compliance, wire preload, and sensor filtering.
+
 ## Week 1 Engineering Basis
 
 The first sizing pass treats the gimbal/nozzle carrier as a rigid body with an offset center of mass. If the moving assembly has mass `m` and its center of mass is offset by `r` from the rotation axis, the static gravity moment is
@@ -153,6 +171,7 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] Rev A individual STL exports
 - [x] Pico firmware skeleton
 - [x] Firmware bring-up plan
+- [x] Data capture and analysis pipeline
 - [ ] Dimension-verified CAD after parts arrive
 - [ ] Hardware servo-neutral test
 

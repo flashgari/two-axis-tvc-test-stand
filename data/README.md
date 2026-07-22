@@ -14,3 +14,9 @@ mode
 ```
 
 Keep raw logs unchanged. Processed plots should go in `plots/`.
+
+## Examples
+
+Tracked example logs live in `data/examples/`. These are not hardware data; they are synthetic logs used to verify the analysis pipeline before the Pico is connected.
+
+Raw hardware logs in `data/*.csv` are ignored by Git by default so accidental large or messy test files do not enter the repo.

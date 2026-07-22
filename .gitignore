@@ -8,3 +8,6 @@ __pycache__/
 # Keep raw/processed engineering artifacts intentional.
 data/*.csv
 !data/README.md
+!data/examples/
+!data/examples/*.csv
+!data/examples/*.json
