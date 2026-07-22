@@ -10,12 +10,17 @@ servo_w = 19.8;
 servo_h = 37.8;
 spline_d = 6.0;
 spline_h = 5.0;
+servo_mount_slot_l = 9.0;
+servo_mount_slot_w = 3.4;
+servo_mount_span_x = 49.5; // Rev A standard-servo placeholder; verify on arrival.
+servo_mount_span_y = 27.5; // Rev A standard-servo placeholder; verify on arrival.
 
 // Structural assumptions.
 base_l = 160;
 base_w = 120;
 base_t = 6;
 wall_t = 6;
+mount_t = 5;
 outer_w = 95;
 outer_h = 95;
 outer_depth = 16;
@@ -25,6 +30,8 @@ nozzle_l = 85;
 nozzle_d = 24;
 imu_l = 28;
 imu_w = 22;
+bearing_d = 8.0; // placeholder for small supported shaft/bushing option.
+shaft_d = 4.0;
 
 // Display angles for concept visualization.
 yaw_demo_deg = 0;
@@ -58,6 +65,28 @@ module servo_envelope(label_side=1) {
     translate([-servo_l/2 - 8, label_side*(servo_w/2 + 3), -servo_h/2 + 6])
         color([0.4, 0.4, 0.4])
             cylinder(h=18, d=2, center=true, $fn=12);
+}
+
+module slotted_hole(slot_l, slot_w, h=2) {
+    hull() {
+        translate([-slot_l/2 + slot_w/2, 0, 0])
+            cylinder(h=h, d=slot_w, center=true);
+        translate([slot_l/2 - slot_w/2, 0, 0])
+            cylinder(h=h, d=slot_w, center=true);
+    }
+}
+
+module servo_mount_plate() {
+    difference() {
+        color([0.12, 0.12, 0.12, 0.35])
+            cube([servo_mount_span_x + 18, servo_mount_span_y + 16, mount_t], center=true);
+
+        // Slotted mount holes tolerate printed error and servo-to-servo variation.
+        for (x=[-servo_mount_span_x/2, servo_mount_span_x/2])
+            for (y=[-servo_mount_span_y/2, servo_mount_span_y/2])
+                translate([x, y, 0])
+                    slotted_hole(servo_mount_slot_l, servo_mount_slot_w, mount_t + 1);
+    }
 }
 
 module base_plate() {
@@ -97,6 +126,12 @@ module pitch_carrier() {
     translate([0, 0, inner_h + 7])
         color([0.3, 0.0, 0.8, 0.85])
             cube([3, imu_l, imu_w], center=true);
+
+    // Supported pitch-axis shaft reference.
+    translate([0, 0, inner_h/2])
+        rotate([90, 0, 0])
+            color([0.05, 0.05, 0.05])
+                cylinder(h=inner_w + 22, d=shaft_d, center=true);
 }
 
 module mock_nozzle() {
@@ -118,6 +153,13 @@ module gimbal_assembly() {
     translate([0, 0, base_t/2])
         yaw_frame();
 
+    // Bearing/bushing references for supported pitch axis.
+    for (y=[-outer_w/2 - 5, outer_w/2 + 5])
+        translate([0, y, base_t/2 + 8 + inner_h/2])
+            rotate([90, 0, 0])
+                color([0.2, 0.2, 0.2, 0.7])
+                    cylinder(h=4, d=bearing_d, center=true);
+
     rotate([0, 0, yaw_demo_deg])
         translate([0, 0, base_t/2 + 8])
             rotate([0, pitch_demo_deg, 0]) {
@@ -135,11 +177,16 @@ base_plate();
 translate([-45, -base_w/2 + 22, base_t/2 + servo_h/2])
     rotate([0, 0, 0])
         servo_envelope(1);
+translate([-45, -base_w/2 + 22, base_t + 2])
+    servo_mount_plate();
 
 // Pitch servo envelope shown on right side of gimbal.
 translate([0, outer_w/2 + 23, base_t/2 + 45])
     rotate([90, 0, 90])
         servo_envelope(-1);
+translate([0, outer_w/2 + 23, base_t/2 + 45])
+    rotate([90, 0, 90])
+        servo_mount_plate();
 
 gimbal_assembly();
 

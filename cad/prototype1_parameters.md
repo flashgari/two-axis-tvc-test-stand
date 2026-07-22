@@ -36,6 +36,21 @@ Selected actuator: Hitec HS-625MG standard metal-gear PWM servo.
 | No-load speed at `6.0 V` | `0.15 s/60 deg` | Hitec/ServoCity published value |
 | Deadband | `8 us` | ServoCity published value |
 
+## Rev A Mounting Assumptions
+
+The OpenSCAD baseline includes slotted servo mounting holes rather than fixed exact holes. This is intentional: standard-size servo mounting patterns vary slightly, and printed parts will have tolerance error.
+
+| Parameter | Rev A placeholder | Note |
+| --- | ---: | --- |
+| mount slot length | `9.0 mm` | Allows alignment adjustment after printing. |
+| mount slot width | `3.4 mm` | Intended for M3-class clearance; verify screw choice. |
+| nominal long-axis hole span | `49.5 mm` | Standard-servo placeholder; verify on HS-625MG body. |
+| nominal cross-axis hole span | `27.5 mm` | Standard-servo placeholder; verify on HS-625MG body. |
+| supported shaft diameter | `4.0 mm` | Placeholder for small shaft/bushing concept. |
+| bearing/bushing envelope | `8.0 mm` | Placeholder until hardware choice is finalized. |
+
+The slotted mount design reduces alignment-induced friction. If the servo is forced into a misaligned printed mount, the output shaft can see side load, which increases hysteresis and makes step-response data harder to interpret.
+
 ## First Layout Assumptions
 
 | Quantity | Value | Reason |
@@ -50,6 +65,17 @@ Selected actuator: Hitec HS-625MG standard metal-gear PWM servo.
 | Mock nozzle diameter | `24 mm` | Lightweight printable surrogate. |
 | IMU pad | `28 x 22 mm` | Fits common BNO085 breakout footprint envelope. |
 | Minimum moving-wire slack | `40 mm` | Reduces cable-induced restoring moment. |
+
+## Rev A Mass-Property Estimates
+
+Detailed assumptions are documented in [rev_a_mass_inertia_estimate.md](rev_a_mass_inertia_estimate.md).
+
+| Axis | Moving mass estimate | Inertia estimate | Gravity moment estimate |
+| --- | ---: | ---: | ---: |
+| pitch | `73 g` | `3.0e-5 kg m^2` | `0.018 N m` |
+| yaw | `200 g` | `3.0e-4 kg m^2` | `0.039 N m` |
+
+These estimates suggest the prototype is not static-torque limited. The more important Rev A risk is dynamic behavior: servo speed, deadband, gear backlash, frame compliance, and cable-induced bias.
 
 ## Physics Inputs For CAD
 

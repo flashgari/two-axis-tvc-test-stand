@@ -61,6 +61,16 @@ Key CAD files:
 - [cad/prototype1_parameters.md](cad/prototype1_parameters.md)
 - [cad/prototype1_gimbal_baseline.scad](cad/prototype1_gimbal_baseline.scad)
 - [cad/prototype1_cad_review.md](cad/prototype1_cad_review.md)
+- [cad/rev_a_mass_inertia_estimate.md](cad/rev_a_mass_inertia_estimate.md)
+- [cad/rev_a_print_and_assembly_plan.md](cad/rev_a_print_and_assembly_plan.md)
+
+Rev A keeps the CAD tied to the rotational plant:
+
+```text
+I_axis theta_ddot + c theta_dot + k theta = tau_servo + tau_disturbance
+```
+
+Current estimates are `73 g` moving mass and `3.0e-5 kg m^2` inertia for pitch, and `200 g` moving mass and `3.0e-4 kg m^2` inertia for yaw. Those values imply the first hardware tests should focus less on static torque and more on servo bandwidth, deadband, backlash, structural compliance, wire-induced bias, and repeatability.
 
 ## Week 1 Engineering Basis
 
@@ -119,6 +129,8 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] Vendor shortlist before purchase
 - [x] Final servo path selected before ordering
 - [x] CAD baseline started
+- [x] Rev A mass/inertia estimate
+- [x] Rev A print and assembly plan
 - [ ] Dimension-verified CAD after parts arrive
 - [ ] Firmware bring-up plan
 

@@ -13,6 +13,8 @@ Prototype 1 uses two Hitec HS-625MG metal-gear servos and a 3D printed nested gi
 | `prototype1_parameters.md` | Traceable dimensional assumptions, servo specs, axis convention, and quantities to verify. |
 | `prototype1_gimbal_baseline.scad` | Parametric OpenSCAD first-pass model. |
 | `prototype1_cad_review.md` | CAD design intent, physical rationale, review checklist, and expected Rev A failure modes. |
+| `rev_a_mass_inertia_estimate.md` | First-pass moving mass, center-of-mass, gravity moment, and inertia estimates. |
+| `rev_a_print_and_assembly_plan.md` | Printable part breakdown, assembly order, inspection checks, and physics rationale. |
 | `exports/prototype1_cad_baseline.svg` | Static layout preview for GitHub/recruiter review. |
 
 First CAD revision should include:
@@ -39,3 +41,20 @@ Design priorities:
 The first model is deliberately parametric because the hardware will be measured after arrival. Servo body dimensions, horn thickness, spline fit, IMU board dimensions, moving mass, and center of mass should be updated before final printing.
 
 The CAD is evaluated by how well it supports test data, not just how clean it looks. The stand should make it possible to identify actuator bandwidth, backlash, frame compliance, cable-induced bias, and IMU measurement issues from controlled experiments.
+
+## Rev A Physical Model
+
+The CAD package keeps the mechanical design tied to the rotational plant:
+
+```text
+I_axis theta_ddot + c theta_dot + k theta = tau_servo + tau_disturbance
+```
+
+The Rev A mass estimate predicts:
+
+| Axis | Moving mass estimate | Inertia estimate | Gravity moment estimate |
+| --- | ---: | ---: | ---: |
+| pitch | `73 g` | `3.0e-5 kg m^2` | `0.018 N m` |
+| yaw | `200 g` | `3.0e-4 kg m^2` | `0.039 N m` |
+
+These estimates suggest the first prototype should be limited more by servo speed, deadband, backlash, structural compliance, and wiring disturbances than by static torque. The hardware tests should therefore emphasize step response, hysteresis, steady-state bias, and repeatability.
