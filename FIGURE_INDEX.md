@@ -63,3 +63,27 @@ lower `I_pitch` gives larger angular acceleration for the same net servo torque.
 **What it shows:** How raw Pico serial CSV logs become response metrics and plots.
 
 **Upper-division physical interpretation:** Metrics such as rise time, overshoot, settling time, steady-state error, and hysteresis bias are mapped to physical mechanisms instead of being treated as generic plot labels. The pipeline is designed to close the loop from CAD assumptions to measured plant behavior to Rev B design changes.
+
+## 8. Build Readiness Package
+
+[Build readiness checklist](docs/build_readiness_checklist.md)
+
+**What it shows:** The project is prepared for fabrication before parts arrive: print settings, tools, electronics checks, assembly gates, and data readiness are defined.
+
+**Upper-division physical interpretation:** Build readiness protects measurement quality. Print orientation affects stiffness and failure mode, fastener preload affects friction, voltage droop affects useful torque, and wiring preload introduces disturbance moments. Preparing these gates before assembly prevents the first test data from being corrupted by uncontrolled setup variables.
+
+## 9. Rev A Inspection Checklist
+
+[Rev A inspection checklist](docs/rev_a_inspection_checklist.md)
+
+**What it shows:** The plan for measuring purchased servos, printed parts, hard-stop angles, backlash, free play, and mass properties before powered motion.
+
+**Upper-division physical interpretation:** Inspection is a plant-identification step. Dimensional mismatch, frame warping, backlash, and mass-property errors change `I_axis`, `c`, `k`, and `tau_disturbance`; recording them gives context for prediction-versus-measurement discrepancies.
+
+## 10. First Test Report Template
+
+[First test report template](docs/first_test_report_template.md)
+
+**What it shows:** The structure for turning the first hardware run into a formal engineering test report with metadata, setup evidence, raw data, plots, metrics, physical interpretation, anomalies, and Rev B actions.
+
+**Upper-division physical interpretation:** The report template forces the correct aerospace engineering loop: assumption, prediction, measurement, discrepancy, physical cause, and design change. That is the part of the project that demonstrates hardware testing maturity rather than just assembly.

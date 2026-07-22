@@ -33,6 +33,7 @@ That question is answered by comparing predicted and measured step-response metr
 | Analysis and plotting pipeline | complete | [docs/test_and_analysis_workflow.md](docs/test_and_analysis_workflow.md) |
 | Pre-hardware dynamic prediction | complete | [docs/pre_hardware_simulation.md](docs/pre_hardware_simulation.md) |
 | Rev A design review | complete | [docs/rev_a_design_review_summary.md](docs/rev_a_design_review_summary.md) |
+| Build readiness package | complete | [docs/build_readiness_checklist.md](docs/build_readiness_checklist.md) |
 | Calibration and first-test worksheet | ready before hardware | [docs/hardware_calibration_worksheet.md](docs/hardware_calibration_worksheet.md) |
 | Physical build and measured data | next | first servo-neutral and pitch/yaw step tests |
 
@@ -181,9 +182,12 @@ The project is ready to move from design artifacts to hardware purchase and firs
 Build documents:
 
 - [docs/final_purchase_package.md](docs/final_purchase_package.md)
+- [docs/build_readiness_checklist.md](docs/build_readiness_checklist.md)
 - [docs/rev_a_design_review_summary.md](docs/rev_a_design_review_summary.md)
+- [docs/rev_a_inspection_checklist.md](docs/rev_a_inspection_checklist.md)
 - [docs/first_hardware_test_procedure.md](docs/first_hardware_test_procedure.md)
 - [docs/hardware_calibration_worksheet.md](docs/hardware_calibration_worksheet.md)
+- [docs/first_test_report_template.md](docs/first_test_report_template.md)
 
 Core purchase subtotal is currently about `$135.83` before tax and shipping. Full first-build estimate remains about `$165-220` after generic hardware, filament, and small tools/fixtures.
 
@@ -259,6 +263,9 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] Hardware calibration worksheet and log templates
 - [x] Recruiter-facing figure index
 - [x] Rev A design review summary
+- [x] Build readiness checklist
+- [x] Rev A inspection checklist
+- [x] First hardware test report template
 - [ ] Dimension-verified CAD after parts arrive
 - [ ] Hardware servo-neutral test
 
