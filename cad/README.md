@@ -15,6 +15,7 @@ Prototype 1 uses two Hitec HS-625MG metal-gear servos and a 3D printed nested gi
 | `prototype1_cad_review.md` | CAD design intent, physical rationale, review checklist, and expected Rev A failure modes. |
 | `rev_a_mass_inertia_estimate.md` | First-pass moving mass, center-of-mass, gravity moment, and inertia estimates. |
 | `rev_a_print_and_assembly_plan.md` | Printable part breakdown, assembly order, inspection checks, and physics rationale. |
+| `rev_a_part_manifest.md` | Separated printable part list with orientation, physics rationale, and fit-check sequence. |
 | `exports/prototype1_cad_baseline.svg` | Static layout preview for GitHub/recruiter review. |
 | `exports/prototype1_gimbal_baseline.stl` | OpenSCAD-rendered review STL of the combined layout assembly. |
 
@@ -34,6 +35,33 @@ This STL is **review evidence**, not a final print package. It proves that the p
 - wire strain-relief clips
 
 The physical reason for separating the parts is that each component has a different print orientation, stiffness requirement, and failure mode. For example, servo mounts need strong screw-hole walls, the pitch carrier needs low moving inertia, and strain-relief clips need to control wire-induced torque without adding unnecessary mass to the moving body.
+
+## Rev A Printable Parts
+
+Individual Rev A part files are in [parts/](parts/):
+
+| Part | OpenSCAD file |
+| --- | --- |
+| base plate | `parts/base_plate.scad` |
+| yaw servo mount | `parts/yaw_servo_mount.scad` |
+| outer yaw frame | `parts/outer_yaw_frame.scad` |
+| pitch servo mount | `parts/pitch_servo_mount.scad` |
+| inner pitch/nozzle carrier | `parts/inner_pitch_carrier.scad` |
+| mock nozzle | `parts/mock_nozzle.scad` |
+| hard-stop block | `parts/hard_stop_block.scad` |
+| wire strain-relief clip | `parts/wire_strain_relief_clip.scad` |
+
+Individual Rev A STL exports are in [exports/rev_a_parts/](exports/rev_a_parts/). The export log is [exports/rev_a_parts/export_log.md](exports/rev_a_parts/export_log.md).
+
+To export one part, open its `.scad` file in OpenSCAD, press `F6`, then use `File -> Export -> Export as STL`.
+
+The command-line equivalent is:
+
+```text
+/Applications/OpenSCAD-2021.01.app/Contents/MacOS/OpenSCAD \
+  -o cad/exports/rev_a_parts/base_plate.stl \
+  cad/parts/base_plate.scad
+```
 
 First CAD revision should include:
 

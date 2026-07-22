@@ -63,6 +63,9 @@ Key CAD files:
 - [cad/prototype1_cad_review.md](cad/prototype1_cad_review.md)
 - [cad/rev_a_mass_inertia_estimate.md](cad/rev_a_mass_inertia_estimate.md)
 - [cad/rev_a_print_and_assembly_plan.md](cad/rev_a_print_and_assembly_plan.md)
+- [cad/rev_a_part_manifest.md](cad/rev_a_part_manifest.md)
+
+Separated Rev A printable part files now live in [cad/parts/](cad/parts/), with rendered STL exports in [cad/exports/rev_a_parts/](cad/exports/rev_a_parts/). Each part is split out so its print orientation and structural role can be reviewed independently before physical fabrication.
 
 Rev A keeps the CAD tied to the rotational plant:
 
@@ -131,6 +134,8 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] CAD baseline started
 - [x] Rev A mass/inertia estimate
 - [x] Rev A print and assembly plan
+- [x] Rev A printable part split
+- [x] Rev A individual STL exports
 - [ ] Dimension-verified CAD after parts arrive
 - [ ] Firmware bring-up plan
 
