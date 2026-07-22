@@ -16,6 +16,24 @@ Prototype 1 uses two Hitec HS-625MG metal-gear servos and a 3D printed nested gi
 | `rev_a_mass_inertia_estimate.md` | First-pass moving mass, center-of-mass, gravity moment, and inertia estimates. |
 | `rev_a_print_and_assembly_plan.md` | Printable part breakdown, assembly order, inspection checks, and physics rationale. |
 | `exports/prototype1_cad_baseline.svg` | Static layout preview for GitHub/recruiter review. |
+| `exports/prototype1_gimbal_baseline.stl` | OpenSCAD-rendered review STL of the combined layout assembly. |
+
+## Export Status
+
+The combined layout model has been rendered in OpenSCAD and exported as `exports/prototype1_gimbal_baseline.stl`.
+
+This STL is **review evidence**, not a final print package. It proves that the parametric CAD baseline renders as a valid 3D object, but the assembly still needs to be split into manufacturing parts before printing:
+
+- base plate
+- yaw servo mount
+- outer yaw frame
+- pitch servo mount
+- inner pitch/nozzle carrier
+- mock nozzle
+- hard-stop blocks
+- wire strain-relief clips
+
+The physical reason for separating the parts is that each component has a different print orientation, stiffness requirement, and failure mode. For example, servo mounts need strong screw-hole walls, the pitch carrier needs low moving inertia, and strain-relief clips need to control wire-induced torque without adding unnecessary mass to the moving body.
 
 First CAD revision should include:
 
