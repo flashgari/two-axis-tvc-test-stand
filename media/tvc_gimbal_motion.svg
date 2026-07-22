@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+  <title id="title">Two-axis TVC gimbal motion visualization</title>
+  <desc id="desc">Animated schematic of a two-axis thrust-vector-control test stand showing yaw-frame motion, pitch-carrier motion, and nozzle thrust vector deflection.</desc>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    svg {
+      background: #f8fafc;
+      color: #0f172a;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .panel {
+      fill: #ffffff;
+      stroke: #cbd5e1;
+      stroke-width: 2;
+    }
+    .grid {
+      stroke: #e2e8f0;
+      stroke-width: 1;
+    }
+    .base {
+      fill: #d8dee8;
+      stroke: #334155;
+      stroke-width: 2;
+    }
+    .yaw {
+      fill: #22c55e;
+      stroke: #14532d;
+      stroke-width: 2;
+      transform-origin: 480px 285px;
+      animation: yawMotion 5.5s ease-in-out infinite;
+    }
+    .pitch {
+      fill: #3b82f6;
+      stroke: #1e3a8a;
+      stroke-width: 2;
+      transform-origin: 480px 285px;
+      animation: pitchMotion 5.5s ease-in-out infinite;
+    }
+    .nozzle {
+      fill: #ef4444;
+      stroke: #7f1d1d;
+      stroke-width: 2;
+      transform-origin: 480px 285px;
+      animation: combinedNozzle 5.5s ease-in-out infinite;
+    }
+    .thrust {
+      stroke: #7c3aed;
+      stroke-width: 5;
+      stroke-linecap: round;
+      marker-end: url(#arrow);
+      transform-origin: 480px 285px;
+      animation: combinedNozzle 5.5s ease-in-out infinite;
+    }
+    .axis-yaw {
+      stroke: #16a34a;
+      stroke-width: 4;
+      stroke-dasharray: 8 8;
+    }
+    .axis-pitch {
+      stroke: #2563eb;
+      stroke-width: 4;
+      stroke-dasharray: 8 8;
+    }
+    .callout {
+      fill: #0f172a;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .small {
+      fill: #475569;
+      font-size: 13px;
+    }
+    .label-bg {
+      fill: #ffffff;
+      stroke: #cbd5e1;
+    }
+    .trace {
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+    }
+    .trace.pitch {
+      stroke: #2563eb;
+      animation: none;
+    }
+    .trace.yaw {
+      stroke: #16a34a;
+      animation: none;
+    }
+    .trace.thrust-trace {
+      stroke: #7c3aed;
+      animation: none;
+    }
+    @keyframes yawMotion {
+      0%, 100% { transform: rotate(-8deg); }
+      50% { transform: rotate(8deg); }
+    }
+    @keyframes pitchMotion {
+      0%, 100% { transform: rotate(6deg); }
+      50% { transform: rotate(-6deg); }
+    }
+    @keyframes combinedNozzle {
+      0%, 100% { transform: rotate(-14deg); }
+      50% { transform: rotate(14deg); }
+    }
+    @media (prefers-color-scheme: dark) {
+      svg { background: #0b1120; color: #e5e7eb; }
+      .panel, .label-bg { fill: #111827; stroke: #334155; }
+      .base { fill: #334155; stroke: #cbd5e1; }
+      .grid { stroke: #1f2937; }
+      .callout { fill: #f8fafc; }
+      .small { fill: #cbd5e1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .yaw, .pitch, .nozzle, .thrust { animation: none; }
+    }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <rect x="28" y="26" width="904" height="468" rx="16" class="panel"/>
+  <text x="56" y="68" class="callout">Two-axis TVC Rev A motion concept</text>
+  <text x="56" y="92" class="small">Yaw frame carries the pitch subsystem; pitch carrier points the nozzle and thrust vector.</text>
+
+  <g transform="translate(0 16)">
+    <line x1="180" y1="355" x2="780" y2="355" class="grid"/>
+    <line x1="210" y1="330" x2="750" y2="330" class="grid"/>
+    <line x1="240" y1="305" x2="720" y2="305" class="grid"/>
+
+    <ellipse cx="480" cy="360" rx="250" ry="44" class="base"/>
+    <rect x="342" y="318" width="276" height="50" rx="8" class="base"/>
+    <circle cx="360" cy="343" r="7" fill="#111827"/>
+    <circle cx="600" cy="343" r="7" fill="#111827"/>
+
+    <line x1="480" y1="148" x2="480" y2="386" class="axis-yaw"/>
+    <text x="502" y="158" class="small">yaw axis</text>
+    <line x1="342" y1="285" x2="618" y2="285" class="axis-pitch"/>
+    <text x="626" y="289" class="small">pitch axis</text>
+
+    <g class="yaw">
+      <rect x="352" y="170" width="256" height="46" rx="8"/>
+      <rect x="352" y="170" width="38" height="158" rx="8"/>
+      <rect x="570" y="170" width="38" height="158" rx="8"/>
+      <rect x="330" y="326" width="78" height="44" rx="7" opacity="0.85"/>
+      <rect x="552" y="326" width="78" height="44" rx="7" opacity="0.85"/>
+    </g>
+
+    <g class="pitch">
+      <rect x="420" y="240" width="120" height="56" rx="9"/>
+      <rect x="450" y="208" width="60" height="34" rx="5"/>
+      <circle cx="480" cy="285" r="13" fill="#dbeafe" stroke="#1e3a8a" stroke-width="2"/>
+    </g>
+
+    <g class="nozzle">
+      <path d="M480 285 L342 248 Q320 242 316 258 L315 314 Q320 330 342 322 Z"/>
+      <circle cx="480" cy="285" r="17" fill="#fecaca" stroke="#7f1d1d" stroke-width="2"/>
+    </g>
+    <line x1="480" y1="285" x2="270" y2="285" class="thrust"/>
+
+    <path d="M276 285 C330 225 414 215 480 285 C548 354 636 342 690 285" class="trace thrust-trace" opacity="0.22"/>
+  </g>
+
+  <g transform="translate(58 410)">
+    <rect x="0" y="0" width="844" height="50" rx="10" class="label-bg"/>
+    <circle cx="28" cy="25" r="8" fill="#22c55e"/>
+    <text x="44" y="30" class="small">yaw frame rotation: changes azimuth, carries larger inertia</text>
+    <circle cx="330" cy="25" r="8" fill="#3b82f6"/>
+    <text x="346" y="30" class="small">pitch carrier rotation: lower inertia, faster expected response</text>
+    <circle cx="650" cy="25" r="8" fill="#7c3aed"/>
+    <text x="666" y="30" class="small">thrust vector: commanded torque direction</text>
+  </g>
+</svg>

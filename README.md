@@ -39,6 +39,14 @@ That question is answered by comparing predicted and measured step-response metr
 
 ## Visual Evidence
 
+### Two-Axis Gimbal Motion
+
+![Two-axis TVC gimbal motion](media/tvc_gimbal_motion.svg)
+
+Open the browser-viewable animation here: [media/tvc_gimbal_animation.html](media/tvc_gimbal_animation.html).
+
+This motion visual shows the key architecture before hardware arrives: the yaw frame rotates the full pitch/nozzle subsystem, while the pitch carrier rotates only the inner moving assembly. That is why yaw has larger rotational inertia and is expected to show slower response for the same servo torque limit. The purple thrust-vector direction is the mechanical control output that would create vehicle attitude-control torque in a flight vehicle.
+
 ### Rev A CAD Baseline
 
 ![Prototype 1 CAD baseline](cad/exports/prototype1_cad_baseline.svg)
@@ -266,6 +274,7 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] Build readiness checklist
 - [x] Rev A inspection checklist
 - [x] First hardware test report template
+- [x] Gimbal motion animation
 - [ ] Dimension-verified CAD after parts arrive
 - [ ] Hardware servo-neutral test
 

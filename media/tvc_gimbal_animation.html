@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Two-Axis TVC Gimbal Animation</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f8fafc;
+      --fg: #0f172a;
+      --muted: #475569;
+      --panel: #ffffff;
+      --border: #cbd5e1;
+      --grid: #e2e8f0;
+      --base: #d8dee8;
+      --green: #16a34a;
+      --green-fill: #22c55e;
+      --blue: #2563eb;
+      --blue-fill: #3b82f6;
+      --red: #dc2626;
+      --red-fill: #ef4444;
+      --purple: #7c3aed;
+      --shadow: rgba(15, 23, 42, 0.14);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1120;
+        --fg: #f8fafc;
+        --muted: #cbd5e1;
+        --panel: #111827;
+        --border: #334155;
+        --grid: #1f2937;
+        --base: #334155;
+        --shadow: rgba(0, 0, 0, 0.35);
+      }
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: 0;
+    }
+    p {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.45;
+      margin: 0;
+      max-width: 980px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin: 22px 0;
+    }
+    button, select {
+      min-height: 42px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--fg);
+      border-radius: 8px;
+      padding: 0 14px;
+      font: inherit;
+    }
+    button {
+      cursor: pointer;
+      font-weight: 700;
+    }
+    label {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    input[type="range"] {
+      width: min(520px, 64vw);
+      accent-color: var(--blue);
+    }
+    .readouts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .readout {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 10px 28px var(--shadow);
+    }
+    .readout b {
+      display: block;
+      font-size: 24px;
+      margin-top: 4px;
+    }
+    .readout span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .stage {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 18px 46px var(--shadow);
+      overflow: hidden;
+    }
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: var(--panel);
+    }
+    .panel {
+      fill: var(--panel);
+      stroke: var(--border);
+      stroke-width: 2;
+    }
+    .grid {
+      stroke: var(--grid);
+      stroke-width: 1;
+    }
+    .base {
+      fill: var(--base);
+      stroke: var(--muted);
+      stroke-width: 2;
+    }
+    .yaw {
+      fill: var(--green-fill);
+      stroke: #14532d;
+      stroke-width: 2;
+    }
+    .pitch {
+      fill: var(--blue-fill);
+      stroke: #1e3a8a;
+      stroke-width: 2;
+    }
+    .nozzle {
+      fill: var(--red-fill);
+      stroke: #7f1d1d;
+      stroke-width: 2;
+    }
+    .axis-yaw {
+      stroke: var(--green);
+      stroke-width: 4;
+      stroke-dasharray: 8 8;
+    }
+    .axis-pitch {
+      stroke: var(--blue);
+      stroke-width: 4;
+      stroke-dasharray: 8 8;
+    }
+    .thrust {
+      stroke: var(--purple);
+      stroke-width: 5;
+      stroke-linecap: round;
+      marker-end: url(#arrow);
+    }
+    .trace {
+      fill: none;
+      stroke: var(--purple);
+      stroke-width: 3;
+      opacity: 0.22;
+    }
+    text {
+      fill: var(--fg);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .small {
+      fill: var(--muted);
+      font-size: 14px;
+    }
+    .note {
+      padding: 16px 18px 18px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    @media (max-width: 720px) {
+      main {
+        padding: 18px;
+      }
+      .readouts {
+        grid-template-columns: 1fr;
+      }
+      label {
+        width: 100%;
+      }
+      input[type="range"] {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Two-Axis TVC Gimbal Animation</h1>
+    <p>Concept animation for the Rev A benchtop thrust-vector-control stand. Yaw rotates the outer frame and carries the pitch subsystem; pitch rotates the nozzle carrier; the purple vector shows the commanded thrust direction that would generate vehicle control torque.</p>
+
+    <div class="controls" aria-label="Animation controls">
+      <button id="playButton" type="button">Pause</button>
+      <label for="timeSlider">time
+        <input id="timeSlider" type="range" min="0" max="1000" value="0">
+      </label>
+      <label for="speedSelect">speed
+        <select id="speedSelect">
+          <option value="0.5">0.5x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2x</option>
+        </select>
+      </label>
+    </div>
+
+    <section class="readouts" aria-label="Live gimbal state">
+      <div class="readout"><span>yaw command</span><b id="yawReadout">0.0 deg</b></div>
+      <div class="readout"><span>pitch command</span><b id="pitchReadout">0.0 deg</b></div>
+      <div class="readout"><span>net nozzle deflection</span><b id="netReadout">0.0 deg</b></div>
+    </section>
+
+    <section class="stage">
+      <svg id="gimbalSvg" viewBox="0 0 980 560" role="img" aria-labelledby="svgTitle svgDesc">
+        <title id="svgTitle">Animated TVC gimbal schematic</title>
+        <desc id="svgDesc">Schematic showing two-axis gimbal motion, pitch and yaw axes, nozzle deflection, and thrust vector direction.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="var(--purple)"/>
+          </marker>
+        </defs>
+
+        <rect x="24" y="24" width="932" height="474" rx="14" class="panel"/>
+        <text x="56" y="66" font-size="24" font-weight="700">Rev A gimbal kinematics</text>
+        <text x="56" y="94" class="small">Outer yaw frame rotates the entire pitch assembly; inner pitch carrier changes nozzle elevation.</text>
+
+        <g transform="translate(0 20)">
+          <line x1="174" y1="364" x2="806" y2="364" class="grid"/>
+          <line x1="214" y1="334" x2="766" y2="334" class="grid"/>
+          <line x1="254" y1="304" x2="726" y2="304" class="grid"/>
+          <line x1="294" y1="274" x2="686" y2="274" class="grid"/>
+
+          <ellipse cx="490" cy="374" rx="270" ry="48" class="base"/>
+          <rect x="342" y="330" width="296" height="56" rx="8" class="base"/>
+          <circle cx="366" cy="358" r="7" fill="currentColor"/>
+          <circle cx="614" cy="358" r="7" fill="currentColor"/>
+
+          <line x1="490" y1="142" x2="490" y2="410" class="axis-yaw"/>
+          <text x="512" y="152" class="small">yaw axis</text>
+          <line x1="340" y1="294" x2="640" y2="294" class="axis-pitch"/>
+          <text x="648" y="299" class="small">pitch axis</text>
+
+          <g id="yawGroup">
+            <rect x="352" y="170" width="276" height="48" rx="8" class="yaw"/>
+            <rect x="352" y="170" width="40" height="172" rx="8" class="yaw"/>
+            <rect x="588" y="170" width="40" height="172" rx="8" class="yaw"/>
+            <rect x="320" y="340" width="86" height="48" rx="7" class="yaw" opacity="0.88"/>
+            <rect x="574" y="340" width="86" height="48" rx="7" class="yaw" opacity="0.88"/>
+          </g>
+
+          <g id="pitchGroup">
+            <rect x="424" y="248" width="132" height="58" rx="9" class="pitch"/>
+            <rect x="458" y="212" width="64" height="38" rx="5" class="pitch"/>
+            <circle cx="490" cy="294" r="14" fill="#dbeafe" stroke="#1e3a8a" stroke-width="2"/>
+          </g>
+
+          <g id="nozzleGroup">
+            <path d="M490 294 L342 252 Q318 246 314 264 L314 322 Q318 338 342 330 Z" class="nozzle"/>
+            <circle cx="490" cy="294" r="18" fill="#fecaca" stroke="#7f1d1d" stroke-width="2"/>
+          </g>
+
+          <line id="thrustVector" x1="490" y1="294" x2="264" y2="294" class="thrust"/>
+          <path d="M270 294 C332 224 416 224 490 294 C562 364 648 358 710 294" class="trace"/>
+        </g>
+
+        <g transform="translate(72 464)">
+          <circle cx="0" cy="0" r="8" fill="var(--green-fill)"/>
+          <text x="16" y="5" class="small">yaw frame</text>
+          <circle cx="132" cy="0" r="8" fill="var(--blue-fill)"/>
+          <text x="148" y="5" class="small">pitch carrier</text>
+          <circle cx="292" cy="0" r="8" fill="var(--purple)"/>
+          <text x="308" y="5" class="small">thrust vector</text>
+        </g>
+      </svg>
+      <div class="note">
+        The animation is a kinematic visualization, not a finite-element model. Its purpose is to show why yaw inertia is larger: the yaw actuator moves the full pitch/nozzle subsystem, while the pitch actuator moves the smaller inner carrier. That difference is why the pre-hardware model predicts slower yaw response for the same useful servo torque.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const centerX = 490;
+    const centerY = 294;
+    const yawGroup = document.getElementById("yawGroup");
+    const pitchGroup = document.getElementById("pitchGroup");
+    const nozzleGroup = document.getElementById("nozzleGroup");
+    const thrustVector = document.getElementById("thrustVector");
+    const playButton = document.getElementById("playButton");
+    const timeSlider = document.getElementById("timeSlider");
+    const speedSelect = document.getElementById("speedSelect");
+    const yawReadout = document.getElementById("yawReadout");
+    const pitchReadout = document.getElementById("pitchReadout");
+    const netReadout = document.getElementById("netReadout");
+
+    let playing = true;
+    let phase = 0;
+    let previous = performance.now();
+
+    function stateFromPhase(p) {
+      const yaw = 9 * Math.sin(p);
+      const pitch = -6 * Math.sin(p + Math.PI / 5);
+      const net = yaw + pitch;
+      return { yaw, pitch, net };
+    }
+
+    function rotate(angle) {
+      return `rotate(${angle.toFixed(3)} ${centerX} ${centerY})`;
+    }
+
+    function updateVisual() {
+      const state = stateFromPhase(phase);
+      yawGroup.setAttribute("transform", rotate(state.yaw));
+      pitchGroup.setAttribute("transform", rotate(state.yaw + state.pitch));
+      nozzleGroup.setAttribute("transform", rotate(state.net));
+      thrustVector.setAttribute("transform", rotate(state.net));
+      yawReadout.textContent = `${state.yaw.toFixed(1)} deg`;
+      pitchReadout.textContent = `${state.pitch.toFixed(1)} deg`;
+      netReadout.textContent = `${state.net.toFixed(1)} deg`;
+      const normalized = ((phase % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+      timeSlider.value = Math.round(normalized / (2 * Math.PI) * 1000);
+    }
+
+    function tick(now) {
+      const dt = Math.min(0.05, (now - previous) / 1000);
+      previous = now;
+      if (playing) {
+        phase += dt * Number(speedSelect.value) * 1.4;
+        updateVisual();
+      }
+      requestAnimationFrame(tick);
+    }
+
+    playButton.addEventListener("click", () => {
+      playing = !playing;
+      playButton.textContent = playing ? "Pause" : "Play";
+      previous = performance.now();
+    });
+
+    timeSlider.addEventListener("input", () => {
+      playing = false;
+      playButton.textContent = "Play";
+      phase = Number(timeSlider.value) / 1000 * 2 * Math.PI;
+      updateVisual();
+    });
+
+    speedSelect.addEventListener("change", () => {
+      previous = performance.now();
+    });
+
+    updateVisual();
+    requestAnimationFrame(tick);
+  </script>
+</body>
+</html>
