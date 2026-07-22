@@ -75,6 +75,21 @@ I_axis theta_ddot + c theta_dot + k theta = tau_servo + tau_disturbance
 
 Current estimates are `73 g` moving mass and `3.0e-5 kg m^2` inertia for pitch, and `200 g` moving mass and `3.0e-4 kg m^2` inertia for yaw. Those values imply the first hardware tests should focus less on static torque and more on servo bandwidth, deadband, backlash, structural compliance, wire-induced bias, and repeatability.
 
+## Firmware Baseline
+
+The first Pico firmware skeleton is in [firmware/](firmware/), with the bring-up plan in [docs/firmware/firmware_bringup_plan.md](docs/firmware/firmware_bringup_plan.md).
+
+The current firmware implements:
+
+- servo neutral, sweep, and step command modes
+- `+/-10 deg` firmware safety clamp
+- angle-to-PWM mapping
+- CSV telemetry over USB serial
+- BNO085 detection/telemetry placeholder
+- host-side tests for command limits and profiles
+
+Firmware is treated as part of the physical plant, not just software. PWM commands are only actuator inputs; the measured IMU response will reveal servo deadband, backlash, finite speed, structural compliance, and cable-induced disturbance torques.
+
 ## Week 1 Engineering Basis
 
 The first sizing pass treats the gimbal/nozzle carrier as a rigid body with an offset center of mass. If the moving assembly has mass `m` and its center of mass is offset by `r` from the rotation axis, the static gravity moment is
@@ -136,8 +151,10 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] Rev A print and assembly plan
 - [x] Rev A printable part split
 - [x] Rev A individual STL exports
+- [x] Pico firmware skeleton
+- [x] Firmware bring-up plan
 - [ ] Dimension-verified CAD after parts arrive
-- [ ] Firmware bring-up plan
+- [ ] Hardware servo-neutral test
 
 ## Near-Term Build Plan
 
