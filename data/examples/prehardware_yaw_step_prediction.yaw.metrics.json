@@ -1,0 +1,15 @@
+{
+  "axis": "yaw",
+  "samples": 2001,
+  "step_start_s": 0.5,
+  "initial_command_deg": 0.0,
+  "final_command_deg": 5.0,
+  "step_amplitude_deg": 5.0,
+  "response_delay_s": 0.0,
+  "rise_time_10_90_s": 0.118,
+  "settling_time_2pct_s": 0.6619999999999999,
+  "overshoot_pct": 6.393689519089971,
+  "steady_state_error_deg": -1.4173267966569514,
+  "peak_abs_error_deg": 3.190330910567805,
+  "hysteresis_bias_deg": null
+}

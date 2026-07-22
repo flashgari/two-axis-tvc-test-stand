@@ -32,8 +32,10 @@ def main():
         print(f"Saved plot: {out}")
         return
 
+    title = _plot_title(args.csv_path, args.axis)
+
     fig, axes = plt.subplots(3, 1, figsize=(9, 7), sharex=True)
-    fig.suptitle(f"Rev A Synthetic {args.axis.title()} Step Response")
+    fig.suptitle(title)
 
     axes[0].plot(t, cmd, label="command", color="#2563eb", linewidth=2)
     axes[0].plot(t, meas, label="measured", color="#dc2626", linewidth=2)
@@ -54,6 +56,16 @@ def main():
     fig.tight_layout()
     fig.savefig(out)
     print(f"Saved plot: {out}")
+
+
+def _plot_title(csv_path, axis):
+    if "prehardware" in csv_path.stem:
+        prefix = "Rev A Pre-Hardware Prediction"
+    elif "synthetic" in csv_path.stem:
+        prefix = "Rev A Synthetic Analysis Check"
+    else:
+        prefix = "Rev A Measured Test"
+    return f"{prefix}: {axis.title()} Step Response"
 
 
 def _write_basic_svg(out, t, cmd, meas, err, pwm, axis):
@@ -97,7 +109,7 @@ def _write_basic_svg(out, t, cmd, meas, err, pwm, axis):
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="#f8fafc"/>',
-        f'<text x="{margin_l}" y="42" font-family="Arial" font-size="24" font-weight="700" fill="#0f172a">Rev A Synthetic {axis.title()} Step Response</text>',
+        f'<text x="{margin_l}" y="42" font-family="Arial" font-size="24" font-weight="700" fill="#0f172a">{_plot_title(out, axis)}</text>',
     ]
 
     panels = [

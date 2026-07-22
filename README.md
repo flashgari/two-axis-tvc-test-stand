@@ -97,7 +97,7 @@ The verification workflow is documented in [docs/test_and_analysis_workflow.md](
 Current pipeline:
 
 ```text
-Pico serial CSV -> data log -> metrics JSON -> response plot -> physical interpretation
+pre-hardware model -> predicted response -> Pico serial CSV -> measured response -> model update
 ```
 
 The repo includes a synthetic step-response example so the analysis stack can be tested before hardware arrives:
@@ -107,6 +107,28 @@ The repo includes a synthetic step-response example so the analysis stack can be
 - `plots/examples/synthetic_pitch_step_pitch_step_response.svg`
 
 The analysis computes rise time, response delay, overshoot, settling time, steady-state error, peak tracking error, and hysteresis bias. These metrics are interpreted as evidence of actuator bandwidth, deadband, backlash, structural compliance, wire preload, and sensor filtering.
+
+## Pre-Hardware Prediction Baseline
+
+Before parts arrive, the project now includes a low-order dynamic response model in [docs/pre_hardware_simulation.md](docs/pre_hardware_simulation.md) and [scripts/simulate_pre_hardware_response.py](scripts/simulate_pre_hardware_response.py). This is not being used as a polished final truth model. It is a falsifiable engineering baseline that predicts how the printed gimbal should respond if the Rev A mass properties, useful servo torque, actuator lag, damping, stiffness, and disturbance torques are approximately correct.
+
+The pre-hardware plant model is:
+
+```text
+I_axis theta_ddot + c theta_dot + k theta = tau_servo + tau_disturbance
+delta_dot = (delta_cmd - delta) / tau_servo_lag
+tau_servo = clamp(K_servo (delta - theta), -tau_limit, +tau_limit)
+```
+
+This connects CAD to controls: `I_axis` comes from the printed moving mass distribution, `c` represents friction and structural energy loss, `k` represents restoring stiffness and compliance, `tau_disturbance` represents center-of-mass offset and wire preload, and the servo model captures finite bandwidth and useful torque saturation. When real step-response logs are collected, differences between predicted and measured response become design evidence rather than guesswork.
+
+The expected comparison logic is:
+
+- slower measured rise time means the actuator/structure has lower effective bandwidth than assumed
+- larger steady-state error means gravity bias, wire preload, servo deadband, or horn offset is under-modeled
+- larger overshoot or ringing means damping is lower or structural compliance is higher than assumed
+- approach-direction dependence means backlash and Coulomb friction need to be added to the plant model
+- yaw underperformance relative to pitch is expected because yaw carries the pitch subsystem and therefore has much higher rotational inertia
 
 ## Build Transition
 
@@ -187,6 +209,7 @@ tests/      analysis scripts and hardware-in-the-loop test notes
 - [x] Data capture and analysis pipeline
 - [x] Final purchase package
 - [x] First hardware test procedure
+- [x] Pre-hardware dynamic prediction model
 - [ ] Dimension-verified CAD after parts arrive
 - [ ] Hardware servo-neutral test
 

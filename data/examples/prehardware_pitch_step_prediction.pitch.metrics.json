@@ -1,0 +1,15 @@
+{
+  "axis": "pitch",
+  "samples": 2001,
+  "step_start_s": 0.5,
+  "initial_command_deg": 0.0,
+  "final_command_deg": 5.0,
+  "step_amplitude_deg": 5.0,
+  "response_delay_s": 0.0020000000000000018,
+  "rise_time_10_90_s": 0.09999999999999998,
+  "settling_time_2pct_s": 0.22599999999999998,
+  "overshoot_pct": 0.32515397255682643,
+  "steady_state_error_deg": -0.7728440322127272,
+  "peak_abs_error_deg": 4.116344633769961,
+  "hysteresis_bias_deg": null
+}

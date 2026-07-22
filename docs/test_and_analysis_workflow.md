@@ -16,6 +16,7 @@ This matters because the project claim is not simply that the test stand moves. 
 | --- | --- |
 | `scripts/serial_logger.py` | Capture Pico USB serial CSV into `data/`. |
 | `scripts/generate_synthetic_step_log.py` | Generate a synthetic step-response log before hardware is available. |
+| `scripts/simulate_pre_hardware_response.py` | Predict pitch/yaw step response from Rev A inertia, damping, stiffness, disturbance torque, and actuator limits. |
 | `scripts/analyze_step_response.py` | Compute step-response metrics from a CSV log. |
 | `scripts/plot_step_response.py` | Generate command/response/error/PWM plots. |
 | `scripts/tvc_analysis.py` | Shared analysis functions used by scripts and tests. |
@@ -37,6 +38,40 @@ data/examples/synthetic_pitch_step.csv
 data/examples/synthetic_pitch_step.pitch.metrics.json
 plots/examples/synthetic_pitch_step_pitch_step_response.svg
 ```
+
+## Pre-Hardware Prediction Pipeline
+
+Run from the repo root:
+
+```bash
+python3 scripts/simulate_pre_hardware_response.py
+python3 scripts/analyze_step_response.py data/examples/prehardware_pitch_step_prediction.csv --axis pitch
+python3 scripts/analyze_step_response.py data/examples/prehardware_yaw_step_prediction.csv --axis yaw
+python3 scripts/plot_step_response.py data/examples/prehardware_pitch_step_prediction.csv --axis pitch
+python3 scripts/plot_step_response.py data/examples/prehardware_yaw_step_prediction.csv --axis yaw
+```
+
+Outputs:
+
+```text
+data/examples/prehardware_model_parameters.json
+data/examples/prehardware_pitch_step_prediction.csv
+data/examples/prehardware_yaw_step_prediction.csv
+data/examples/prehardware_pitch_step_prediction.pitch.metrics.json
+data/examples/prehardware_yaw_step_prediction.yaw.metrics.json
+plots/examples/prehardware_pitch_step_prediction_pitch_step_response.svg
+plots/examples/prehardware_yaw_step_prediction_yaw_step_response.svg
+```
+
+The prediction model is intentionally simple:
+
+```text
+I_axis theta_ddot + c theta_dot + k theta = tau_servo + tau_disturbance
+delta_dot = (delta_cmd - delta) / tau_servo_lag
+tau_servo = clamp(K_servo (delta - theta), -tau_limit, +tau_limit)
+```
+
+The important portfolio point is that the prediction is falsifiable. If the measured hardware response disagrees with the prediction, that disagreement identifies which physical effect is under-modeled: actuator bandwidth, friction, backlash, structural compliance, wire preload, CM offset, or sensor/filter delay.
 
 ## Hardware Pipeline
 
@@ -74,6 +109,8 @@ The metrics are not generic plotting quantities. Each one maps to a physical mec
 | hysteresis bias | gear backlash, horn slop, friction, or approach-direction dependence |
 
 For a TVC mechanism, static torque margin alone is insufficient. A servo can hold the nozzle and still be a poor actuator if it has excessive phase lag, deadband, backlash, or voltage-sensitive response. The analysis pipeline exists to expose those effects quantitatively.
+
+The pre-hardware prediction should be compared against the first measured log using the same metrics. That comparison is more rigorous than simply showing that the nozzle moves. A predicted rise time that is too optimistic points to unmodeled actuator lag, binding, or supply-voltage sag. A predicted steady-state error that is too small points to unmodeled constant moments from center-of-mass offset, cable preload, servo spline indexing, or deadband. A predicted overshoot that is too low points to underestimated compliance or insufficient damping. A pitch/yaw performance split is physically expected because the yaw axis carries the full pitch assembly, increasing yaw inertia and reducing angular acceleration for the same servo torque.
 
 ## What Makes A Good First Result
 
